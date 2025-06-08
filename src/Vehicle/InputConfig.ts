@@ -1,20 +1,32 @@
 
 
 export  interface InputConfig  {
-    id?:string,
-    name:string,
-    type:'text' | 'number' | 'select' | 'radio' | 'checkbox' | 'select' | 'select-multiple' | 'password' | 'email' | 'textarea' | 'date' | 'time' | 'file' | 'color',
-    label:string | 'No label',
-    options?: string[] | { value: string, label: string }[],
-    multipleSelectOptions?: { value: string, label: string, icon?:React.ComponentType<{ className?: string } >}[],
-    disabled?:boolean,
-    description?:string,
-    maxCount?: number,
-    animation?: number,
-    placeholder?: string,
-    defaultValue: string | number | string[] | number[] | boolean | { value: string, label: string } | { value: string, label: string },
-    defaultChecked?: boolean,
+    id?:string;
+    name:string;
+    type:'text' | 'number' | 'select' | 'radio' | 'checkbox' | 'select' | 'select-multiple' | 'password' | 'email' | 'textarea' | 'date' | 'time' | 'file' | 'color';
+    label:string | 'No label';
+    options?: string[] | { value: string, label: string }[] | (() => Promise<{value:string,  label:string}>);
+    multipleSelectOptions?: { value: string, label: string, icon?:React.ComponentType<{ className?: string } >}[];
+    disabled?:boolean;
+    description?:string;
+    maxCount?: number;
+    animation?: number;
+    placeholder?: string;
+    defaultValue: string | number | string[] | number[] | boolean | { value: string, label: string } | { value: string, label: string };
+    defaultChecked?: boolean;
 }
+const fetchMockCCOptions = async (): Promise<{ value: string; label: string }[]> => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve([
+                { value: "600cc", label: "600cc" },
+                { value: "700cc", label: "700cc" },
+                { value: "800cc", label: "800cc" },
+            ]);
+        }, 1000);
+    });
+};
+
 
 
 const VehicleInputConfig:InputConfig[] =[
@@ -37,13 +49,7 @@ const VehicleInputConfig:InputConfig[] =[
         type:"select",
         label:"CC",
         description:"The engine capacity of the vehicle in cubic centimeters",
-        options: [
-            { value: "100cc", label: "100cc"},
-            { value: "200cc", label: "200cc"},
-            { value: "300cc", label: "300cc"},
-            { value: "400cc", label: "400cc"},
-            { value: "500cc", label: "500cc"},
-        ],
+        options: await fetchMockCCOptions(),
         placeholder: "Select CC",
         defaultValue: "100cc"
     }
