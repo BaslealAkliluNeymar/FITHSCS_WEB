@@ -12,7 +12,7 @@ export  interface InputConfig  {
     maxCount?: number,
     animation?: number,
     placeholder?: string,
-    defaultValue?: string | number | string[] | number[],
+    defaultValue: string | number | string[] | number[] | boolean | { value: string, label: string } | { value: string, label: string },
     defaultChecked?: boolean,
 }
 
@@ -22,12 +22,14 @@ const VehicleInputConfig:InputConfig[] =[
         name:"name",
         type:"text",
         label:"Name",
+        defaultValue:"",
         description:"The name of the vehicle"
     },
     {
         name:"CC Ability",
         type:"number",
         label:"CC",
+        defaultValue: 0,
         description:"The engine capacity of the vehicle in cubic centimeters"
     },
     {
@@ -42,7 +44,8 @@ const VehicleInputConfig:InputConfig[] =[
             { value: "400cc", label: "400cc"},
             { value: "500cc", label: "500cc"},
         ],
-        placeholder: "Select CC"
+        placeholder: "Select CC",
+        defaultValue: "100cc"
     }
 ]
 
@@ -52,24 +55,28 @@ export const formFields: InputConfig[] = [
     name: 'fullName',
     type: 'text',
     label: 'Full Name',
+    defaultValue: '',
     placeholder: 'Enter your name'
   },
   {
     name: 'email',
     type: 'email',
     label: 'Email',
+    defaultValue: 'm@example.com',
     placeholder: 'you@example.com'
   },
   {
     name:'password',
     type: 'password',
     label: 'Password',
+    defaultValue: '',
     placeholder: 'Enter a secure password'
   },
   {
     name:'gender',
     type: 'select',
     label: 'Gender',
+    defaultValue: { value: 'male', label: 'Male' },
     placeholder: 'Choose gender',
     options: [
       { value: 'male', label: 'Male' },
@@ -79,6 +86,7 @@ export const formFields: InputConfig[] = [
   {
     name: 'terms and conditions acceptance',
     type: 'checkbox',
+    defaultValue: false,
     label: 'I accept the Terms',
     defaultChecked: false
   }

@@ -19,7 +19,8 @@ export default function ControlledInput({
 }) {
     const { field } = useController({
         name, 
-        control
+        control,
+        defaultValue: false
     })
 
 
@@ -31,32 +32,37 @@ export default function ControlledInput({
             return (
                 <TextInput
                     { ...field }
+                    defaultValue={config?.defaultValue || ''}
                 />
             )
-        case 'select-multiple':
-            return (
-                 <MultiSelect
-                    {...field}
-                    options={config.multipleSelectOptions || []}
-                    label={config.label}
-                    asChild
+        // case 'select-multiple':
+        //     return (
+        //          <MultiSelect
+        //             {...field}
+        //             options={config.multipleSelectOptions || []}
+        //             label={config.label}
+        //             defaultValue={config?.defaultValue || ''}
+        //             asChild
 
-                />
-            )
+        //         />
+        //     )
         case 'select':
             return (
                <Selector
                    {...field}
                    options={config.options || []}
+                   defaultValue={config?.defaultValue.value}
                    value={field.value}
                    onChange={field.onChange}
                />
             )
         case 'checkbox':
             return (
-                <CheckBox {...field}
-                     label={config.label} 
+                <CheckBox 
+                    {...field}
+                    label={config.label} 
                     defaultChecked={field.value} 
+                    defaultValue={config?.defaultValue || ''}
                     disabled={field.disabled} 
                     id={config.id}
                 />

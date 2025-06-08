@@ -1,21 +1,19 @@
+import React from 'react'
 
-const CheckBox =({  label , id, disabled , defaultChecked ,...props}
-    :{
-        label: string,
-        id?: string,
-        disabled?: boolean,
-        defaultChecked?: boolean
-    }
-) =>{
-    return (
-        <div {...props}>
-            <label htmlFor={id} className="text-sm font-medium text-gray-700">
-                {label}
-            </label>
-            <input type="checkbox" id={id} disabled={disabled} defaultChecked={defaultChecked} />
-        </div>
-    )
+interface CheckBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string
+  id?: string
 }
 
+const CheckBox = ({ label, id,defaultValue, ...props }: CheckBoxProps) => {
+  return (
+    <div className="flex items-center space-x-2">
+      <input type="checkbox" id={id}  {...props} />
+      <label htmlFor={id} className="text-sm font-medium text-gray-700">
+        {label}
+      </label>
+    </div>
+  )
+}
 
-export default CheckBox;
+export default CheckBox
