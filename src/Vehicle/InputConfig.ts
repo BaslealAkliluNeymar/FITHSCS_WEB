@@ -1,6 +1,7 @@
-import { Cat, Dog, Fish, Rabbit, Turtle } from "lucide-react";
+
 
 export  interface InputConfig  {
+    id?:string,
     name:string,
     type:'text' | 'number' | 'select' | 'radio' | 'checkbox' | 'select' | 'select-multiple' | 'password' | 'email' | 'textarea' | 'date' | 'time' | 'file' | 'color',
     label:string | 'No label',
@@ -11,7 +12,8 @@ export  interface InputConfig  {
     maxCount?: number,
     animation?: number,
     placeholder?: string,
-    defaultValue?: string | number | string[] | number[]
+    defaultValue?: string | number | string[] | number[],
+    defaultChecked?: boolean,
 }
 
 
@@ -40,8 +42,6 @@ const VehicleInputConfig:InputConfig[] =[
             { value: "400cc", label: "400cc"},
             { value: "500cc", label: "500cc"},
         ],
-        // maxCount: 3,
-        // animation: 0.3,
         placeholder: "Select CC"
     }
 ]
@@ -75,6 +75,12 @@ export const formFields: InputConfig[] = [
       { value: 'male', label: 'Male' },
       { value: 'female', label: 'Female' }
     ]
+  },
+  {
+    name: 'terms and conditions acceptance',
+    type: 'checkbox',
+    label: 'I accept the Terms',
+    defaultChecked: false
   }
 ]
 export default VehicleInputConfig;

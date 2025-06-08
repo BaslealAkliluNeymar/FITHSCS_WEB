@@ -3,6 +3,7 @@ import TextInput from "./TextInput"
 import  { type InputConfig } from "../Vehicle/InputConfig"
 import { MultiSelect } from "./MultiSelect"
 import Selector from "./Selector"
+import CheckBox from "./CheckBox"
 export default function ControlledInput({
     name,
     label,
@@ -50,6 +51,15 @@ export default function ControlledInput({
                    value={field.value}
                    onChange={field.onChange}
                />
+            )
+        case 'checkbox':
+            return (
+                <CheckBox {...field}
+                     label={config.label} 
+                    defaultChecked={field.value} 
+                    disabled={field.disabled} 
+                    id={config.id}
+                />
             )
         default:
             return null
